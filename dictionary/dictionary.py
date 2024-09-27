@@ -1,7 +1,8 @@
-"""_summary_:
+"""
+## summary:
 The module contains classes that represent a map (dictionary).
 
-_classes_:
+## classes:
 - Entry: A class representing a key-value pair.
 - Node: A class representing a node in a binary search tree.
 - Dictionary: A class representing a map (dictionary) by using binary search trees.

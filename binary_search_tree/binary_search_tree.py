@@ -1,7 +1,8 @@
-"""_summary_:
+"""
+## summary:
 The module contains classes that represent binary search trees.
 
-_classes_:
+## classes:
 - Node: A class representing a node in a binary search tree.
 - BinarySearchTree: A class representing a binary search tree (no repeated elements).
 """

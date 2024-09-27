@@ -1,7 +1,8 @@
-"""_summary_:
+"""
+## summary:
 This module contains classes that represent linked lists.
 
-_classes_:
+## classes:
 - Node: A class representing a node in a linked list.
 - LinkedList: A class representing a doubly linked list.
 """

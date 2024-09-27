@@ -1,12 +1,13 @@
-"""_summary_:
+"""
+## summary:
 This module contains classes that represent bank accounts.
 
-_classes_:
+## classes:
 - Transaction: A class representing a transaction.
 - TransactionType: An enumeration of transaction types.
 - Account: The base class for all bank accounts.
 
-_functions_:
+## functions:
 - transfer: Transfer money from one account to another.
 """
 

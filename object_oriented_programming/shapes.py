@@ -1,14 +1,15 @@
-"""_summary_:
+"""
+## summary:
 This module contains classes that represent geometric shapes.
 
-_classes_:
+## classes:
 - Shape: The base class for all shapes.
 - Circle: A class representing a circle.
 - Rectangle: A class representing a rectangle.
 - Square: A class representing a square.
 - Triangle: A class representing a triangle.
 
-_functions_:
+## functions:
 - shape_factory: A factory function that creates a shape based on the given parameters.
 """
 
