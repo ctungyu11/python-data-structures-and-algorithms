@@ -4,12 +4,6 @@ This module contains classes that represent linked lists.
 _classes_:
 - Node: A class representing a node in a linked list.
 - LinkedList: A class representing a doubly linked list.
-
-_functions_:
-- from_list: Create a linked list from a list of values.
-- to_list: Create a list of values from a linked list.
-- reverse: Reverse a linked list.
-- copy: Create a copy of a linked list.
 """
 
 from typing import Optional
@@ -82,6 +76,32 @@ class LinkedList:
         
         self.size -= 1
         return value
+    
+    def insert(self, index: int, value: any) -> None:
+        """Insert a node with the given value at the specified index."""
+        if index < 0 or index > self.size:
+            raise IndexError("Index out of range")
+        
+        if index == 0:
+            self.append_left(value)
+        elif index == self.size:
+            self.append_right(value)
+        else:
+            current = self._get_node(index)
+            node = Node(value)
+            current.prev.next = node
+            node.prev = current.prev
+            node.next = current
+            current.prev = node
+            self.size += 1
+    
+    def __contains__(self, value: any) -> bool:
+        current = self.head
+        while current is not None:
+            if current.value == value:
+                return True
+            current = current.next
+        return False
 
     def __len__(self) -> int:
         return self.size
@@ -104,39 +124,41 @@ class LinkedList:
         value = self._current.value
         self._current = self._current.next
         return value
+    
+    def __getitem__(self, index: int) -> any:
+        if index < 0 or index >= self.size:
+            raise IndexError("Index out of range")
+        
+        return self._get_node(index).value
+    
+    def _get_node(self, index: int) -> Node:
+        current = self.head
+        for _ in range(index):
+            current = current.next
+        return current
 
-
-def from_list(values: list) -> LinkedList:
-    """Create a linked list from a list of values."""
-    linked_list = LinkedList()
-    for value in values:
-        linked_list.append_right(value)
-    return linked_list
-
-
-def to_list(linked_list: LinkedList) -> list:
-    """Create a list of values from a linked list."""
-    return [value for value in linked_list]
-
-
-def reverse(linked_list: LinkedList) -> LinkedList:
-    """Reverse a linked list."""
-    reversed_list = LinkedList()
-    current = linked_list.tail
-    while current is not None:
-        reversed_list.append_right(current.value)
-        current = current.prev
-    return reversed_list
-
-
-def copy(linked_list: LinkedList) -> LinkedList:
-    """Create a copy of a linked list."""
-    linked_list_copy = LinkedList()
-    current = linked_list.head
-    while current is not None:
-        linked_list_copy.append_right(current.value)
-        current = current.next
-
+    def __setitem__(self, index: int, value: any) -> None:
+        if index < 0 or index >= self.size:
+            raise IndexError("Index out of range")
+        
+        self._get_node(index).value = value
+    
+    def __delitem__(self, index: int) -> None:
+        if index < 0 or index >= self.size:
+            raise IndexError("Index out of range")
+        
+        node = self._get_node(index)
+        if node.prev is None:
+            self.head = node.next
+        else:
+            node.prev.next = node.next
+        
+        if node.next is None:
+            self.tail = node.prev
+        else:
+            node.next.prev = node.prev
+        
+        self.size -= 1
 
 if __name__ == "__main__":
     linked_list = LinkedList()
@@ -157,18 +179,17 @@ if __name__ == "__main__":
     print(linked_list)  # 1 -> 2 -> 3 -> 4
     print(len(linked_list))  # 4
     
-    reversed_list = reverse(linked_list)
-    print(reversed_list)  # 4 -> 3 -> 2 -> 1
-    print(to_list(reversed_list))  # [4, 3, 2, 1]
+    linked_list[0] = 0
+    linked_list[3] = 5
+    del linked_list[1]
+    print(linked_list)  # 0 -> 3 -> 5
+    print(linked_list[0])  # 0
+    print(linked_list[1])  # 3
+    print(linked_list[2])  # 5
     
-    linked_list = from_list([1, 2, 3, 4, 5])
-    print(linked_list)  # 1 -> 2 -> 3 -> 4 -> 5
-    print(to_list(linked_list))  # [1, 2, 3, 4, 5]
+    print(0 in linked_list)  # True
+    print(1 in linked_list)  # False
     
-    for value in linked_list:
-        print(value)
-
-    linked_list2 = copy(linked_list)
-    linked_list2.append_right(6)
-    print(linked_list) # 1 -> 2 -> 3 -> 4 -> 5
+    linked_list.insert(1, 2)
+    print(linked_list)
     
