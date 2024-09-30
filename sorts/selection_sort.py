@@ -10,7 +10,7 @@ of selection sort is O(n^2) in the worst case.
 from typing import List, Callable
 
 
-def selection_sort(arr: List[any], cmp: Callable[[any, any], bool] = lambda x, y: x < y) -> List[any]:
+def selection_sort(arr: List[any], key: Callable[[any, any], bool] = lambda x, y: x < y) -> List[any]:
     """Sort the array using selection sort."""
     new_arr = arr.copy()
     n = len(new_arr)
@@ -18,7 +18,7 @@ def selection_sort(arr: List[any], cmp: Callable[[any, any], bool] = lambda x, y
     for i in range(n - 1):
         min_idx = i
         for j in range(i + 1, n):
-            if not cmp(new_arr[min_idx], new_arr[j]):
+            if not key(new_arr[min_idx], new_arr[j]):
                 min_idx = j
         
         new_arr[i], new_arr[min_idx] = new_arr[min_idx], new_arr[i]

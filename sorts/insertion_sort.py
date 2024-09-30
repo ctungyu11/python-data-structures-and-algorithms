@@ -9,7 +9,7 @@ and it is efficient for small data sets. The time complexity of insertion sort i
 from typing import List, Callable
 
 
-def insertion_sort(arr: List[any], cmp: Callable[[any, any], bool] = lambda x, y: x < y) -> List[any]:
+def insertion_sort(arr: List[any], key: Callable[[any, any], bool] = lambda x, y: x < y) -> List[any]:
     """Sort the array using insertion sort."""
     new_arr = arr.copy()
     
@@ -17,7 +17,7 @@ def insertion_sort(arr: List[any], cmp: Callable[[any, any], bool] = lambda x, y
     for i in range(1, n):
         key = new_arr[i]
         j = i - 1
-        while j >= 0 and not cmp(new_arr[j], key):
+        while j >= 0 and not key(new_arr[j], key):
             new_arr[j + 1] = new_arr[j]
             j -= 1
         new_arr[j + 1] = key
